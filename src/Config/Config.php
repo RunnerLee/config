@@ -61,6 +61,19 @@ class Config
         return $this->autoCache;
     }
 
+
+    public function loadPrivateConfig($filePath)
+    {
+        $config = ConfigLoader::load($filePath);
+
+        while(list($name, $value) = each($config)) {
+            PrivateConfig::set($name, $value);
+        }
+
+        return true;
+    }
+
+
     /**
      * @param null $resource
      * @param bool $merge

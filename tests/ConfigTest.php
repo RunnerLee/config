@@ -90,4 +90,15 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(file_exists($cloneConfig->getCache()->getCacheFile()));
     }
+
+
+    public function testPrivate()
+    {
+        $config = new Config();
+        $config->loadPrivateConfig(__DIR__ . '/config/private.ini');
+
+        $config->load(__DIR__ . '/config/private.php');
+
+        $this->assertSame('root', $config->get('db_user'));
+    }
 }
